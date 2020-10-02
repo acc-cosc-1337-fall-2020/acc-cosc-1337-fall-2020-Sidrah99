@@ -1,7 +1,8 @@
 //write includes statements
-
+#include <iostream>
+#include "loops.h"
 //write using statements for cin and cout
-
+using std::cout; using std::cin;
 
 /*
 Use a do while loop to prompt the user for 
@@ -10,6 +11,32 @@ factorial.  Also, loop continues as long as user wants to.
 */
 int main() 
 {
+		int again = 1;
+	
+	do 
+	{
+		int num;
+		int result;
+		
+		cout << "Enter a number between 1 and 10: ";
+		cin >> num;
+		while(num >=1 && num <=10)
+		{
+			result = factorial(num);
+		
+			cout << "\n";
+		
+			cout << "The factorial for " << num << " is: " << result;
+		
+			cout << "\n";
+		
+			cout << "Press 1 if you want to try again.";
+			cin >> again;
+		}
+	}
+
+	while(again == 1);
+	
 
 	return 0;
 }
