@@ -18,10 +18,11 @@ int main()
 		int num;
 		int result;
 		
-		cout << "Enter a number between 1 and 10: ";
-		cin >> num;
+		num = 1;
 		while(num >=1 && num <=10)
 		{
+			cout << "Enter a number between 1 and 10: ";
+			cin >> num;
 			result = factorial(num);
 		
 			cout << "\n";

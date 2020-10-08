@@ -12,5 +12,5 @@ int factorial(int num)
         counter = counter + 1;
     }
 
-    return num;
+    return product;
 }
