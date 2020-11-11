@@ -3,6 +3,9 @@
 #include <vector>
 using std::string; using std::vector;
 
+#ifndef TIC_TAC_TOE_H
+#define TIC_TAC_TOE_H
+
 class TicTacToe
 {
     
@@ -10,13 +13,14 @@ public:
 bool game_over();
 void start_game(string first_player);
 void mark_board(int position);
-string get_player()const { return player; };
-void display_board()const;
+string get_player()const { return next_player; };
 string get_winner()const { return winner; };
+friend std::istream & operator>>(std::istream & in, TicTacToe & t);
+friend std::ostream & operator<<(std::ostream & out, const TicTacToe & t);
 
 
 private:
-string player;
+string next_player;
 string winner;
 vector<string> pegs{ " ", " ", " ", " ", " ", " ", " ", " ", " " };
 void set_next_player();
@@ -28,3 +32,5 @@ bool check_diagonal_win();
 void set_winner();
 
 };
+
+#endif
