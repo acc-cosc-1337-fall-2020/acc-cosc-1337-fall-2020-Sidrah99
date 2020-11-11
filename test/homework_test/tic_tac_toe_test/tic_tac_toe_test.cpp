@@ -165,3 +165,29 @@ TEST_CASE("Test 'O' wins.")
 	REQUIRE(game.get_winner() == "O");
 
 }
+
+TEST_CASE("Test 'X' wins.")
+{
+	TicTacToe game;
+	TicTacToe m;
+
+	game.start_game("X");
+
+	game.mark_board(2);
+	REQUIRE(game.game_over() == false);
+
+	game.mark_board(1);
+	REQUIRE(game.game_over() == false);
+
+	game.mark_board(5);
+	REQUIRE(game.game_over() == false);
+
+	game.mark_board(3);
+	REQUIRE(game.game_over() == false);
+
+	game.mark_board(8);
+	REQUIRE(game.game_over() == true);
+
+	REQUIRE(game.get_winner() == "X");
+
+}
