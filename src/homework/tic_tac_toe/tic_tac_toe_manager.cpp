@@ -5,24 +5,24 @@
 #include "tic_tac_toe_manager.h"
 using std::cout; using std::cin; using std::string; using std::vector;
 
-void TicTacToeManager::save_game(TicTacToe b)
+void TicTacToeManager::save_game(std::unique_ptr<TicTacToe> & b)
 {
-    games.push_back(b);
-    update_winner_count(b.get_winner());
+    update_winner_count(b->get_winner());
+    games.push_back(std::move(b));
 }
 
 void TicTacToeManager::get_winner_total(int & o, int & w, int & t)
 {
-    o = o_win;
     w = x_win;
+    o = o_win;
     t = ties;
 }
 
-std::ostream & operator<<(std::ostream & out, TicTacToeManager & manager)
+std::ostream & operator<<(std::ostream & out, const TicTacToeManager & manager)
 {
-    for(int i=0; i < manager.games.size(); i++)
+    for(const auto& i : manager.games)
     {
-        out << manager.games[i];
+        out << *i;
         out << "\n";
     }
 

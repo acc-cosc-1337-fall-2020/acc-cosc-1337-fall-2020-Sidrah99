@@ -81,94 +81,16 @@ void TicTacToe::clear_board()
 
 bool TicTacToe::check_column_win()
 {
-
-    if(pegs[0] == "X" && pegs[3] == "X" && pegs[6] == "X")
-    {
-        return true;
-    }
-
-    if(pegs[0] == "O" && pegs[3] == "O" && pegs[6] == "O")
-    {
-        return true;
-    }
-    if(pegs[1] == "X" && pegs[4] == "X" && pegs[7] == "X")
-    {
-        return true;
-    }
-
-    if(pegs[1] == "O" && pegs[4] == "O" && pegs[7] == "O")
-    {
-        return true;
-    }
-    if(pegs[2] == "X" && pegs[5] == "X" && pegs[8] == "X")
-    {
-        return true;
-    }
-
-    if(pegs[2] == "O" && pegs[5] == "O" && pegs[8] == "O")
-    {
-        return true;
-    }
-
     return false;  
 }
 
 bool TicTacToe::check_row_win()
 {
-    if(pegs[0] == "X" && pegs[1] == "X" && pegs[2] == "X")
-    {
-        return true;
-    }
-   
-    if(pegs[0] == "O" && pegs[1] == "O" && pegs[2] == "O")
-    {
-        return true;
-    }
-    if(pegs[3] == "X" && pegs[4] == "X" && pegs[5] == "X")
-    {
-        return true;
-    }
-   
-    if(pegs[3] == "O" && pegs[4] == "O" && pegs[5] == "O")
-    {
-        return true;
-    }
-    if(pegs[6] == "X" && pegs[7] == "X" && pegs[8] == "X")
-    {
-        return true;
-    }
-   
-    if(pegs[6] == "O" && pegs[7] == "O" && pegs[8] == "O")
-    {
-        return true;
-    }
-
     return false;  
 }
 
 bool TicTacToe::check_diagonal_win()
 {
-    
-        if(pegs[0] == "X" && pegs[4] == "X" && pegs[8] == "X")
-        {
-            return true;
-        }
-    
-        else if(pegs[0] == "O" && pegs[4] == "O" && pegs[8] == "O")
-        {
-            return true;
-        }
-
-        else if(pegs[6] == "X" && pegs[4] == "X" && pegs[2] == "X")
-        {
-            return true;
-        }
-    
-        else if(pegs[6] == "O" && pegs[4] == "O" && pegs[2] == "O")
-        {
-            return true;
-        }
-    
     return false;
 }
 
@@ -184,32 +106,62 @@ void TicTacToe::set_winner()
     }
 }
 
-std::istream & operator>>(std::istream & in, TicTacToe & t)
+std::istream& operator>>(std::istream& in, TicTacToe& t)
 {
-    int position;
-    cout << "\nPlease enter the position on the board you wish to mark: ";
-	in >> position;
+    
+    if(t.pegs.size() == 9)
+    {
+        int position;
+        cout << "\nPlease enter the position (1-9) on the board you wish to mark: ";
+	    in >> position;
 		while(position < 1 || position > 9)
     	{
-        		cout << "Please enter a position between 1 and 9: ";
-				in >> position;
+        	cout << "Please enter a position between 1 and 9: ";
+			in >> position;
     	}
 		t.mark_board(position);
+    }
 
-        return in;
+    else if(t.pegs.size() == 16)
+    {
+        int position;
+        cout << "\nPlease enter the position (1-16) on the board you wish to mark: ";
+	    in >> position;
+		while(position < 1 || position > 16)
+    	{
+        	cout << "Please enter a position between 1 and 16: ";
+			in >> position;
+    	}
+		t.mark_board(position); 
+    }
+    
+    return in;
 }
 
 std::ostream & operator<<(std::ostream & out, const TicTacToe & t)
 {
-    for(int a = 0; a < t.pegs.size(); a++)
+    if(t.pegs.size() == 9)
     {
-        out << t.pegs[a] << "| ";
-        if(a == 2 || a == 5 || a == 8)
+        for(int a = 0; a < t.pegs.size(); a++)
         {
+            out << t.pegs[a] << "| ";
+            if(a == 2 || a == 5 || a == 8)
+            {
             out << "\n";
+            }
+        }
+    }
+    else if(t.pegs.size() == 16)
+    {
+        for(int a = 0; a < t.pegs.size(); a++)
+        {
+            out << t.pegs[a] << "| ";
+            if(a == 3 || a == 7 || a == 11 || a == 15)
+            {
+            out << "\n";
+            }
         }
     }
 
     return out;
-
 }
