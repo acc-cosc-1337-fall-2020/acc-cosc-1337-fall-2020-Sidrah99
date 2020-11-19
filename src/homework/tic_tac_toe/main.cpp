@@ -2,6 +2,7 @@
 #include "tic_tac_toe_manager.h"
 #include "tic_tac_toe_3.h"
 #include "tic_tac_toe_4.h"
+#include "tic_tac_toe_data.h"
 #include <string>
 #include <vector>
 #include <iostream>
@@ -13,7 +14,8 @@ int main()
 {
 	
 	string again = "Y";
-	TicTacToeManager m;	
+	TicTacToeData data;
+	TicTacToeManager m(data);
 	std::unique_ptr<TicTacToe> game;
 	string entry;
 	int board;
@@ -31,15 +33,6 @@ int main()
 			cin >> board;
 		}
 
-		cout << "Player 1, please enter X or O: ";
-		cin >> entry;
-
-		while(entry != "X" && entry != "x" && entry != "O" && entry != "o")
-    	{
-			cout << "Please enter 'X' or 'O': ";
-			cin >> entry;
-    	}
-
 		if(board == 3)
 		{
 			game = std::make_unique<TicTacToe3>();
@@ -48,10 +41,18 @@ int main()
 		{
 			game = std::make_unique<TicTacToe4>();
 		}
+
+		cout << "Player 1, please enter X or O: ";
+		cin >> entry;
+
+		while(entry != "X" && entry != "x" && entry != "O" && entry != "o")
+    	{
+			cout << "Please enter 'X' or 'O': ";
+			cin >> entry;
+    	}
 		
 		game->start_game(entry);
-		cin >> *game; 
-		cout << *game;
+		
 
 		while(game->game_over() ==  false)
 		{

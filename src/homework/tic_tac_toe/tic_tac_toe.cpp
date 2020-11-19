@@ -22,7 +22,7 @@ bool TicTacToe::game_over()
         set_winner();
         return true;
     }
-    else if(check_column_win() == false && check_row_win() == false && check_diagonal_win() == false && check_board_full() == true)
+    else if(check_board_full() == true)
     {
         winner = "C";
         return true;
@@ -60,9 +60,9 @@ void TicTacToe::set_next_player()
 
 bool TicTacToe::check_board_full()
 {
-    for(int i=0; i < pegs.size(); i++)
+    for(auto& p : pegs)
     {
-        if(pegs[i] == " ")
+        if(p == " ")
         {
             return false;
         }
