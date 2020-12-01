@@ -28,12 +28,13 @@ vector<std::unique_ptr<TicTacToe>> TicTacToeData::get_games()
     vector<std::unique_ptr<TicTacToe>> boards;
     ifstream file;
     string line;
-    vector<string> pegs;
 
     file.open("games.txt");
     
     while(getline(file, line))
     {
+        vector<string> pegs;
+
         for(auto&c : line)
         {
             string str(1,c);
